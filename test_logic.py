@@ -31,7 +31,7 @@ class TestCoder(unittest.TestCase):
         self.assertEqual(Coder().url_encode(test_string), test_value)
 
     def test_image_base64_encode(self):
-        image = 'One_black_Pixel.png'
+        image = 'images/One_black_Pixel.png'
         test_value = ('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0I'
                       'Ars4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqG'
                       'QAAAAMSURBVBhXY2BgYAAAAAQAAVzN/2kAAAAASUVORK5CYII=')
