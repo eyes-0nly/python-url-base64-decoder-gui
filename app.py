@@ -26,7 +26,7 @@ class MainWindow(Gtk.Window):
         rbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
         mainbox.pack_start(rbox, False, False, 0)
 
-        label = Gtk.Label("Insert text you want to encode:")
+        label = Gtk.Label("Insert text you want to encode(decode):")
         lbox.pack_start(label, False, False, 0)
 
         self.textview = Gtk.TextView()
@@ -35,7 +35,7 @@ class MainWindow(Gtk.Window):
         scrolledwindow.add(self.textview)
         lbox.pack_start(scrolledwindow, True, True, 0)
 
-        label2 = Gtk.Label("The result of encoding:")
+        label2 = Gtk.Label("The result of encoding(decoding):")
         lbox.pack_start(label2, False, False, 0)
 
         self.textview_result = Gtk.TextView()
