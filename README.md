@@ -3,4 +3,4 @@ GTK+ 3 GUI example of the encoder and decoder for base64 and URL-encoding. Conve
 
 ## Screenshot
 
-![Screenshot](images/window.png "Application window screenshot")
+![Screenshot](images/window-gtk.png "Application window screenshot")
