@@ -31,7 +31,7 @@ class MainWindow(Gtk.Window):
 
         self.textview = Gtk.TextView()
         self.textbuffer = self.textview.get_buffer()
-        self.textbuffer.set_text("Hello World! Привет мир!")
+        self.textbuffer.set_text("Hello World!")
         scrolledwindow.add(self.textview)
         lbox.pack_start(scrolledwindow, True, True, 0)
 
