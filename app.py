@@ -64,6 +64,10 @@ class MainWindow(Gtk.Window):
         rbox.pack_start(self.button_encode, False, False, 0)
         rbox.pack_start(self.button_decode, False, False, 0)
 
+        separator = Gtk.HSeparator()
+        rbox.pack_start(separator, False, True, 15)
+        separator.show()
+
         self.button_image_encode = Gtk.Button("Encode image to base64")
         self.button_image_encode.connect("clicked", self.choose_image_clicked)
         rbox.pack_start(self.button_image_encode, False, False, 0)
