@@ -72,6 +72,27 @@ class MainWindow(Gtk.Window):
         self.button_image_encode.connect("clicked", self.choose_image_clicked)
         rbox.pack_start(self.button_image_encode, False, False, 0)
 
+        check_dataurl = Gtk.CheckButton("DataURL")
+        check_dataurl.connect("toggled", self.on_dataurl_toggled)
+        rbox.pack_start(check_dataurl, False, False, 0)
+        self.dataurl = False
+
+        inbox = Gtk.HBox(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        rbox.pack_start(inbox, True, True, 0)
+
+        button_close = Gtk.Button.new_with_mnemonic("_Close")
+        button_close.connect("clicked", self.on_close_clicked)
+        inbox.pack_end(button_close, False, True, 0)
+
+    def on_close_clicked(self, button):
+        Gtk.main_quit()
+
+    def on_dataurl_toggled(self, button):
+        if button.get_active():
+            self.dataurl = True
+        else:
+            self.dataurl = False
+
     def encode_clicked(self, widget):
         enc = self.name_combo.get_active()
         if enc == 1:
@@ -114,11 +135,12 @@ class MainWindow(Gtk.Window):
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             filename = dialog.get_filename()
-            coder = Coder().image_base64_encode(filename)
+            coder = Coder().image_base64_encode(filename, self.dataurl)
+            self.textbuffer_result.set_text(coder)
             self.textbuffer.set_text("Image encoded: " + filename)
             self.textbuffer_result.set_text(coder)
         elif response == Gtk.ResponseType.CANCEL:
-            self.textbuffer.set_text("Cancel clicked")
+            self.textbuffer.set_text("Canceled")
         dialog.destroy()
 
     def add_filters(self, dialog):

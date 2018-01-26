@@ -2,6 +2,7 @@
 
 from urllib import parse
 import base64
+import binascii
 
 
 class Coder:
@@ -32,8 +33,27 @@ class Coder:
         return string
 
     @staticmethod
-    def image_base64_encode(filename):
+    def image_base64_encode(filename, dataurl=False):
         with open(filename, "rb") as image_file:
-            string = base64.b64encode(image_file.read())
-            string = string.decode('ascii')
-        return string
+            data = image_file.read()
+            if dataurl:
+                filetype = binascii.hexlify(data[:2])
+                if filetype == b'8950':
+                    string = base64.b64encode(data)
+                    string = string.decode('ascii')
+                    result = '<img src="data:{};base64,{}" >'.format(
+                        'image/png', string)
+                elif filetype == b'ffd8':
+                    string = base64.b64encode(data)
+                    string = string.decode('ascii')
+                    result = '<img src="data:{};base64,{}" >'.format(
+                        'image/jpeg', string)
+                elif filetype == b'4749':
+                    string = base64.b64encode(data)
+                    string = string.decode('ascii')
+                    result = '<img src="data:{};base64,{}" >'.format(
+                        'image/gif', string)
+            else:
+                string = base64.b64encode(data)
+                result = string.decode('ascii')
+        return result

@@ -37,6 +37,16 @@ class TestCoder(unittest.TestCase):
                       'QAAAAMSURBVBhXY2BgYAAAAAQAAVzN/2kAAAAASUVORK5CYII=')
         self.assertEqual(Coder().image_base64_encode(image), test_value)
 
+    def test_image_base64_encode_with_dataurl(self):
+        image = 'images/One_black_Pixel.png'
+        test_value = ('<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgA'
+                      'AAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjw'
+                      'v8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY2BgYAAAA'
+                      'AQAAVzN/2kAAAAASUVORK5CYII=" >')
+        dataurl = True
+        self.assertEqual(Coder().image_base64_encode(image, dataurl),
+                         test_value)
+
 
 if __name__ == '__main__':
     unittest.main()
