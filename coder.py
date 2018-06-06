@@ -24,12 +24,32 @@ class Coder:
 
     @staticmethod
     def url_encode(string):
-        string = parse.quote(string, safe="%/:=&?~#+!$,;'@()*[]")
+        try:
+            protocol = string[:string.index("//")]+"//"
+        except ValueError:
+            protocol = "http://"
+        string = string.replace("http://", "", 1)
+        string = string.replace("https://", "", 1)
+        if "/" in string:
+            string = parse.quote(string.replace(string[:string.index("/")], string[:string.index("/")].encode("idna").decode("utf-8"), 1), safe="%/:=&?~#+!$,;'@()*[]")
+        else:
+            string = string.encode("idna").decode("utf-8")
+        string = protocol+string
         return string
 
     @staticmethod
     def url_decode(string):
-        string = parse.unquote(string, encoding='utf-8')
+        try:
+            protocol = string[:string.index("//")]+"//"
+        except ValueError:
+            protocol = "http://"
+        string = string.replace("http://", "", 1)
+        string = string.replace("https://", "", 1)
+        if "/" in string:
+            string = parse.unquote(string.replace(string[:string.index("/")], bytearray(string[:string.index("/")], "idna").decode("idna"), 1), encoding='utf-8')
+        else:
+            string = bytearray(string, "idna").decode("idna")
+        string = protocol+string
         return string
 
     @staticmethod
