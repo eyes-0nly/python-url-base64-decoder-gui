@@ -24,10 +24,20 @@ class TestCoder(unittest.TestCase):
         test_value = 'https://ru.wikipedia.org/wiki/Кириллица'
         self.assertEqual(Coder().url_decode(test_string), test_value)
 
+    def test_domain_idna_decode(self):
+        test_string = ('https://xn--e1aybc.xn--p1ai')
+        test_value = 'https://тест.рф'
+        self.assertEqual(Coder().url_decode(test_string), test_value)
+
     def test_url_encode(self):
         test_string = 'https://ru.wikipedia.org/wiki/Кириллица'
         test_value = ('https://ru.wikipedia.org/wiki/%D0%9A%D0%B8%D1%80%D0%'
                       'B8%D0%BB%D0%BB%D0%B8%D1%86%D0%B0')
+        self.assertEqual(Coder().url_encode(test_string), test_value)
+
+    def test_domain_idna_encode(self):
+        test_string = ('https://тест.рф')
+        test_value = 'https://xn--e1aybc.xn--p1ai'
         self.assertEqual(Coder().url_encode(test_string), test_value)
 
     def test_image_base64_encode(self):
